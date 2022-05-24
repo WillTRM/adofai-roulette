@@ -1,2 +1,9 @@
 # adofai-roulette
-i don't want to lose this so i'll store it in here
+
+## v1.0.0
+
+Initial release.
+
+**Added:**
+- Readme
+- Changelog
