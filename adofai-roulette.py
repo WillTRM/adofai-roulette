@@ -33,7 +33,14 @@ score = 0
 rng = random.randint(1,332)
 print(songlist[rng] + " - " + creatorlist[rng] + " - " + difficultylist[rng] + " - Goal: 1%")
 print("")
-response = int(input(""))
+while True:
+    response = input("")
+    try:
+        int(response)
+    except ValueError:
+        continue
+    break
+response = int(response)
 oldpercent = response
 print("")
 
@@ -43,12 +50,19 @@ while response < 100:
     rng = random.randint(1,332)
     print(songlist[rng] + " - " + creatorlist[rng] + " - " + difficultylist[rng] + " - Goal: " + str(response + 1) + "%")
     print("")
-    response = int(input(""))
-    if response == "balls":
+    print(oldpercent)
+    while True:
+        response = input("")
+        if response == "balls":
             exit()
-    while response < (oldpercent + 1):
-        response = int(input(""))
-        continue
+        try:
+            int(response)
+        except ValueError:
+            continue
+        if int(response) <= (oldpercent):
+            continue
+        response = int(response)
+        break
     print("")
     oldpercent = response
     score += 1
