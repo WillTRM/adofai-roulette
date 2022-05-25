@@ -1,4 +1,9 @@
 # adofai-roulette
+
+## v1.1.0
+
+- Letters will no longer crash the program
+
 ## v1.0.1
 
 - You can no longer go down percentages
