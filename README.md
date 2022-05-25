@@ -1,5 +1,9 @@
 # adofai-roulette
 
+## v1.2.0
+
+- You *shouldn't* be able to recieve the same chart twice now
+
 ## v1.1.0
 
 - Letters will no longer crash the program
