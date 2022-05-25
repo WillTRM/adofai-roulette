@@ -1,5 +1,7 @@
 import random
 
+# setup song, difficulty, and creator lists
+
 tempfile = open("songs.txt", encoding="utf-8")
 songlistbad = tempfile.readlines()
 tempfile2 = open("difficulties.txt", encoding="utf-8")
@@ -18,10 +20,24 @@ for a in difficultylistbad:
 for a in creatorlistbad:
     creatorlist.append(a.strip())
 
+# variable stuff
+
 print("type 'balls' to give up, type your percentage to continue")
 
 response = 0
+oldpercent = 0
 score = 0
+
+#initial loop
+
+rng = random.randint(1,332)
+print(songlist[rng] + " - " + creatorlist[rng] + " - " + difficultylist[rng] + " - Goal: 1%")
+print("")
+response = int(input(""))
+oldpercent = response
+print("")
+
+#real loop
 
 while response < 100:
     rng = random.randint(1,332)
@@ -29,12 +45,16 @@ while response < 100:
     print("")
     response = int(input(""))
     if response == "balls":
-        exit()
+            exit()
+    while response < (oldpercent + 1):
+        response = int(input(""))
+        continue
     print("")
+    oldpercent = response
     score += 1
 
 print("s+")
 print("good job!")
-print("score: " + str(score )+ " / 100")
+print("score: " + str(score) + " / 100")
 
 input()
