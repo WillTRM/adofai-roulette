@@ -30,7 +30,8 @@ score = 0
 
 #initial loop
 
-rng = random.randint(1,332)
+rng = random.randint(1, len(songlist))
+del songlist[rng]
 print(songlist[rng] + " - " + creatorlist[rng] + " - " + difficultylist[rng] + " - Goal: 1%")
 print("")
 while True:
@@ -47,10 +48,9 @@ print("")
 #real loop
 
 while response < 100:
-    rng = random.randint(1,332)
+    rng = random.randint(1, len(songlist))
     print(songlist[rng] + " - " + creatorlist[rng] + " - " + difficultylist[rng] + " - Goal: " + str(response + 1) + "%")
     print("")
-    print(oldpercent)
     while True:
         response = input("")
         if response == "balls":
@@ -66,6 +66,7 @@ while response < 100:
     print("")
     oldpercent = response
     score += 1
+    del songlist[rng]
 
 print("s+")
 print("good job!")
