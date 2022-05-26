@@ -9,9 +9,9 @@ def readLinesAndStrip(filename: str) -> list[str]:
     return [line.strip() for line in lines]
 
 
-songlist = readLinesAndStrip("songs.txt")
-difficultylist = readLinesAndStrip("difficulties.txt")
-creatorlist = readLinesAndStrip("creators.txt")
+songs = readLinesAndStrip("songs.txt")
+difficulties = readLinesAndStrip("difficulties.txt")
+creators = readLinesAndStrip("creators.txt")
 
 # variable stuff
 
@@ -21,8 +21,8 @@ percent = 0
 score = 0
 
 while percent < 100:
-    rng = random.randrange(len(songlist))
-    print(f"{songlist[rng]} - {creatorlist[rng]} - {difficultylist[rng]} - Goal: {percent + 1}%")
+    rng = random.randrange(len(songs))
+    print(f"{songs[rng]} - {creators[rng]} - {difficulties[rng]} - Goal: {percent + 1}%")
     print()
 
     while True:
@@ -42,7 +42,7 @@ while percent < 100:
 
     print()
     score += 1
-    del songlist[rng]
+    del songs[rng]
 
 print("s+")
 print("good job!")
