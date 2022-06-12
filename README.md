@@ -2,7 +2,7 @@
 
 ## v1.2.0
 
-- You *shouldn't* be able to recieve the same chart twice now
+- You probably won't be able to recieve the same chart twice now
 
 ## v1.1.0
 
