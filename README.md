@@ -1,5 +1,9 @@
 # adofai-roulette
 
+## v2.0.0
+
+- (Finally) added a GUI!
+
 ## v1.2.0
 
 - You probably won't be able to recieve the same chart twice now
