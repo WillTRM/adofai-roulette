@@ -1,4 +1,5 @@
 import random
+import time as t
 import PySimpleGUI as sg
 
 # set up song, difficulty, and creator lists
@@ -25,7 +26,7 @@ layout = [
     [sg.Text(f"{songs[rng]} - {creators[rng]} - {difficulties[rng]}", key = "levelDisp")],
     [sg.Text(f"Goal: {percent + 1}%", key = "percentDisp")],
     [sg.Text("Enter percent as number:"), sg.InputText(size = (5, 1))],
-    [sg.Button("Submit")]
+    [sg.Button("Submit", key = "submitButton"), sg.Button("Give Up")]
 ]
 
 window = sg.Window("ADOFAI Roulette", layout)
@@ -38,7 +39,7 @@ score = 0
 while True:
     event, values = window.read()
 
-    if event == "Submit":
+    if event == "submitButton":
         try:
             parsed_response = int(values[0])
         except ValueError:
@@ -49,14 +50,21 @@ while True:
         percent = parsed_response
         if percent == 100:
             break
-
+        
+    elif event == "Give Up":
+        window["levelDisp"].update(f"Your score: {score}")
+        window["percentDisp"].hide_row()
+        window[0].hide_row()
+        window["submitButton"].hide_row()
+        window.read()
+        
+    elif event == sg.WIN_CLOSED:
+        break
+    
     score += 1
     rng = random.randrange(len(songs))
     window["levelDisp"].update(f"{songs[rng]} - {creators[rng]} - {difficulties[rng]}")
-    window["percentDisp"].update(f"Goal: {percent}%")
+    window["percentDisp"].update(f"Goal: {percent + 1}%")
     del songs[rng]
-
-    if event == sg.WIN_CLOSED:
-        break
-
+        
 window.close()
