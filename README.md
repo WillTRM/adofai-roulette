@@ -1,5 +1,10 @@
 # adofai-roulette
 
+## v2.0.1
+
+- Closing the window no longer results in a crash
+- "Give up" button now displays the final score
+
 ## v2.0.0
 
 - (Finally) added a GUI!
