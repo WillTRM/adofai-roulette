@@ -1,6 +1,6 @@
 # adofai-roulette
 
-##v2.1.0
+## v2.1.0
 
 - Updated data to be from T21+C
 - Added the artist cause that didn't exist for some reason
