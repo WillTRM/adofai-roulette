@@ -1,5 +1,13 @@
 # adofai-roulette
 
+## v2.2.0
+
+- Somehow added a save / import function
+
+Usage:
+export to export json file to current file path (hopefully)
+import and select the json file to load the save (hopefully not bugging out in the process)
+
 ## v2.1.0
 
 - Updated data to be from T21+C
