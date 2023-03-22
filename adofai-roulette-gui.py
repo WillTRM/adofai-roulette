@@ -27,7 +27,6 @@ def openFile():
     filepath = filedialog.askopenfilename()
     file = open(filepath, "r")
     temp = json.load(file)
-    print(temp["levelList"])
     return temp["levelList"], temp["score"], temp["progress"]
 
 songs = readLinesAndStrip("songs.txt")
@@ -108,7 +107,6 @@ while True:
 
     elif event == "importSave":
         rng, score, percent = openFile()
-        print(rng)
     
     window["levelDisp"].update(f"Level: {songs[rng[percent]]}")
     window["artistDisp"].update(f"Artist: {artists[rng[percent]]}")
