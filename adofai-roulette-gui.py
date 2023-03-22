@@ -100,7 +100,6 @@ while True:
             "progress": percent,
             "score": score
         }
-        print(dtw)
         sd = open("adofai_roulette_save.json", "w+")
         json.dump(dtw, sd, indent = 4, cls = npEncoder)
         sd.close()
