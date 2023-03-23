@@ -1,5 +1,9 @@
 # adofai-roulette
 
+## v2.3.0
+
+- Songs are now pulled from the T21+C API, removing the need for external data files!
+
 ## v2.2.0
 
 - Somehow added a save / import function
