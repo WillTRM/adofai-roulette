@@ -1,17 +1,10 @@
 import json
 import random
+import requests
 import time as t
 import numpy as np
 import PySimpleGUI as sg
 from tkinter import filedialog
-
-# set up song, difficulty, and creator lists
-
-def readLinesAndStrip(filename: str) -> list[str]:
-    with open(filename, encoding="utf-8") as file:
-        lines = file.readlines()
-
-    return [line.strip() for line in lines]
 
 #what the fuck does this do
 #i stole it off stack overflow
@@ -23,30 +16,38 @@ class npEncoder(json.JSONEncoder):
             return int(obj)
         return json.JSONEncoder.default(self, obj)
 
+#import save file selection
+
 def openFile():
     filepath = filedialog.askopenfilename()
     file = open(filepath, "r")
     temp = json.load(file)
     return temp["levelList"], temp["score"], temp["progress"]
 
-songs = readLinesAndStrip("songs.txt")
-difficulties = readLinesAndStrip("difficulties.txt")
-creators = readLinesAndStrip("creators.txt")
-artists = readLinesAndStrip("artists.txt")
+#ok so uhhhhh
+#1. set rng to max song id or something idk what i'm doing
+
+def song_count():
+    high = requests.get("https://be.t21c-adofai.kro.kr/levels?limit=1&random=false&seed=621").json()
+    return high["results"][0]["id"]
+
+def request_song(song_id):
+    song_data = json.loads(requests.get(f"https://be.t21c-adofai.kro.kr/levels/{song_id}").text)
+    return song_data
 
 # wow variables
 
 percent = 0
 score = 0
-rng = list(np.random.permutation(np.arange(len(songs) + 1))[:100])
+rng = random.sample(range(1, song_count()), 100)
 
 # set up layout
 
 layout = [
-    [sg.Text(f"Level: {songs[rng[percent]]}", key = "levelDisp")],
-    [sg.Text(f"Artist: {artists[rng[percent]]}", key = "artistDisp")],
-    [sg.Text(f"Difficulty: {difficulties[rng[percent]]}", key = "diffDisp")],
-    [sg.Text(f"Charter: {creators[rng[percent]]}", key = "charterDisp")],
+    [sg.Text(f"Level: {request_song(rng[percent])['song']}", key = "levelDisp")],
+    [sg.Text(f"Artist: {request_song(rng[percent])['artist']}", key = "artistDisp")],
+    [sg.Text(f"Difficulty: {request_song(rng[percent])['diff']}", key = "diffDisp")],
+    [sg.Text(f"Charter: {request_song(rng[percent])['creator']}", key = "charterDisp")],
     [sg.Text(f"Goal: {percent + 1}%", key = "percentDisp")],
     [sg.Text("Enter percent as number:"), sg.InputText(size = (5, 1))],
     [sg.Button("Submit", key = "submitButton"), sg.Button("Give Up")],
@@ -107,10 +108,10 @@ while True:
     elif event == "importSave":
         rng, score, percent = openFile()
     
-    window["levelDisp"].update(f"Level: {songs[rng[percent]]}")
-    window["artistDisp"].update(f"Artist: {artists[rng[percent]]}")
-    window["diffDisp"].update(f"Difficulty: {difficulties[rng[percent]]}")
-    window["charterDisp"].update(f"Charter: {creators[rng[percent]]}")
+    window["levelDisp"].update(f"Level: {request_song(rng[percent])['song']}")
+    window["artistDisp"].update(f"Artist: {request_song(rng[percent])['artist']}")
+    window["diffDisp"].update(f"Difficulty: {request_song(rng[percent])['diff']}")
+    window["charterDisp"].update(f"Charter: {request_song(rng[percent])['creator']}")
     window["percentDisp"].update(f"Goal: {percent + 1}%")
         
 window.close()
