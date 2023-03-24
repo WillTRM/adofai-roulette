@@ -40,14 +40,15 @@ def request_song(song_id):
 percent = 0
 score = 0
 rng = random.sample(range(1, song_count()), 100)
+song_data = request_song(rng[percent])
 
 # set up layout
 
 layout = [
-    [sg.Text(f"Level: {request_song(rng[percent])['song']}", key = "levelDisp")],
-    [sg.Text(f"Artist: {request_song(rng[percent])['artist']}", key = "artistDisp")],
-    [sg.Text(f"Difficulty: {request_song(rng[percent])['diff']}", key = "diffDisp")],
-    [sg.Text(f"Charter: {request_song(rng[percent])['creator']}", key = "charterDisp")],
+    [sg.Text(f"Level: {song_data['song']}", key = "levelDisp")],
+    [sg.Text(f"Artist: {song_data['artist']}", key = "artistDisp")],
+    [sg.Text(f"Difficulty: {song_data['diff']}", key = "diffDisp")],
+    [sg.Text(f"Charter: {song_data['creator']}", key = "charterDisp")],
     [sg.Text(f"Goal: {percent + 1}%", key = "percentDisp")],
     [sg.Text("Enter percent as number:"), sg.InputText(size = (5, 1))],
     [sg.Button("Submit", key = "submitButton"), sg.Button("Give Up")],
@@ -107,11 +108,13 @@ while True:
 
     elif event == "importSave":
         rng, score, percent = openFile()
+
+    song_data = request_song(rng[percent])
     
-    window["levelDisp"].update(f"Level: {request_song(rng[percent])['song']}")
-    window["artistDisp"].update(f"Artist: {request_song(rng[percent])['artist']}")
-    window["diffDisp"].update(f"Difficulty: {request_song(rng[percent])['diff']}")
-    window["charterDisp"].update(f"Charter: {request_song(rng[percent])['creator']}")
+    window["levelDisp"].update(f"Level: {song_data['song']}")
+    window["artistDisp"].update(f"Artist: {song_data['artist']}")
+    window["diffDisp"].update(f"Difficulty: {song_data['diff']}")
+    window["charterDisp"].update(f"Charter: {song_data['creator']}")
     window["percentDisp"].update(f"Goal: {percent + 1}%")
         
 window.close()
