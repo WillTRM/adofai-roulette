@@ -28,11 +28,11 @@ def openFile():
 #1. set rng to max song id or something idk what i'm doing
 
 def song_count():
-    high = requests.get("https://be.t21c-adofai.kro.kr/levels?limit=1&random=false&seed=621").json()
+    high = requests.get("https://be.t21c.kro.kr/levels?limit=1&random=false&seed=621").json()
     return high["results"][0]["id"]
 
 def request_song(song_id):
-    song_data = json.loads(requests.get(f"https://be.t21c-adofai.kro.kr/levels/{song_id}").text)
+    song_data = json.loads(requests.get(f"https://be.t21c.kro.kr/levels/{song_id}").text)
     return song_data
 
 # wow variables
@@ -43,6 +43,8 @@ rng = random.sample(range(1, song_count()), 100)
 song_data = request_song(rng[percent])
 
 # set up layout
+
+sg.theme("DarkPurple1")
 
 layout = [
     [sg.Text(f"Level: {song_data['song']}", key = "levelDisp")],
